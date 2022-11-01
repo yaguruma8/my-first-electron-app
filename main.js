@@ -16,4 +16,21 @@ const createWindow = () => {
 // appモジュールの'ready'イベント発生以降にブラウザウィンドウを作成
 app.whenReady().then(() => {
   createWindow();
+  // ウィンドウのライフサイクルの管理
+  // アプリをactiveにした場合に開いているウィンドウがない場合は新しいウィンドウを開く(macOS)
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  })
+});
+
+// ウィンドウのライフサイクルの管理
+// 全ウィンドウを閉じたときにアプリを終了する（Windows, Linux)
+app.on('window-all-closed', () => {
+  // ユーザーがmacOS(darwin)でない場合
+  if (process.platform !== 'darwin') {
+    // アプリを終了する
+    app.quit();
+  }
 });
