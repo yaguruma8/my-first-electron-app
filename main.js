@@ -2,12 +2,17 @@
 // app アプリケーションのイベントライフサイクルを制御
 // BrowserWindow アプリケーションのウィンドウを作成し管理
 const { app, BrowserWindow } = require('electron');
+const path = require('path');
 
 const createWindow = () => {
   // 新しいウィンドウを作成
   const window = new BrowserWindow({
     width: 800,
     height: 800,
+    webPreferences: {
+      // スクリプトのパスを通してレンダラープロセスにアタッチする
+      preload: path.join(__dirname, 'preload.js'),
+    },
   });
   // index.htmlをBrowserWindowインスタンスに読み込ませる
   window.loadFile('index.html');
@@ -22,7 +27,7 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
-  })
+  });
 });
 
 // ウィンドウのライフサイクルの管理
