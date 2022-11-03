@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>my-electron-app</title>
+    <script src="renderer.js" defer></script>
   </head>
   <body>
     <h1>Hello, World!</h1>
@@ -13,5 +14,9 @@
       <li>Chromiumのバージョン : <span id="chrome-version"></span></li>
       <li>Electronのバージョン : <span id="electron-version"></span></li>
     </ul>
+    <h1>comment</h1>
+      <input type="text" name="comment-input" id="comment-input" placeholder="コメント">
+      <button id="comment-btn">投稿</button>
+    <ul id="comments"></ul>
   </body>
 </html>
